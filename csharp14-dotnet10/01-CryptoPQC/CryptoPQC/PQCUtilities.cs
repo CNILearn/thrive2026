@@ -4,8 +4,6 @@ using System.Text;
 
 namespace CryptoPQC;
 
-#pragma warning disable SYSLIB5006 // Post-Quantum Cryptography APIs are experimental
-
 internal class PQCUtilities
 {
     // =====================================================================
@@ -342,4 +340,3 @@ internal class PQCUtilities
 
 
 }
-#pragma warning restore SYSLIB5006
