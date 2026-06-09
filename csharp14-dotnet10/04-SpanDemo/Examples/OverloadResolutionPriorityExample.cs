@@ -32,7 +32,7 @@ public static class OverloadResolutionPriorityExample
         // -------------------------------------------------------------------
         Console.WriteLine("--- Without [OverloadResolutionPriority] ---\n");
 
-        string input = "Hello, BASTA Spring 2026!";
+        string input = "Hello, Thrive 2026!";
 
         // The compiler resolves CountUpperCase(string) because it is an exact
         // match for the argument type.  The span overload is not preferred.

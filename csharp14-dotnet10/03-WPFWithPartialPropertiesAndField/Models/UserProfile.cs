@@ -78,7 +78,7 @@ public partial class UserProfile : ObservableObject
         if (string.IsNullOrWhiteSpace(value))
             throw new ArgumentException("Last name cannot be empty");
     }
-
+    
     partial void OnEmailChanging(string value)
     {
         if (string.IsNullOrWhiteSpace(value) || !new EmailAddressAttribute().IsValid(value))
