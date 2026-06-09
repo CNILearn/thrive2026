@@ -8,6 +8,9 @@ https://www.thriveconf.com/
 
 Dive into the latest innovations across the .NET platform with an accelerated tour of C# 14 and .NET 10. This session highlights the language enhancements that further reduce boilerplate and improve expressiveness (extension members, enhancements for meta-programming), along with runtime and SDK advances, as well as library enhancements such as OpenAPI 3.1 support, enhancements with Blazor, and .NET runtime libraries.
 
+- [Slides](slides/CSharp14AndDotnet10.pdf)
+- [Samples](csharp-14-dotnet10)
+
 ## How Aspire helps developing all .NET solutions (and more)
 
 10.6.2026 - 9:00 - 10:00, Marka Tulija Cicera
