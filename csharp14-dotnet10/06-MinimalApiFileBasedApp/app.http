@@ -1,4 +1,4 @@
-@baseUrl = http://localhost:5000
+@baseUrl = http://localhost:5002
 
 ### Welcome message
 GET {{baseUrl}}/
