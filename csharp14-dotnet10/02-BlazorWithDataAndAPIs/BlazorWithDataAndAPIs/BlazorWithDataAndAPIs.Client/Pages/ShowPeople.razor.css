@@ -1,0 +1,7 @@
+.people-grid ::deep tr.row-dc {
+    background-color: #cce0ff; /* blue tint for DC characters */
+}
+
+.people-grid ::deep tr.row-marvel {
+    background-color: #ffddd0; /* red tint for Marvel characters */
+}

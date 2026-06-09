@@ -1,0 +1,90 @@
+﻿@using BlazorWithDataAndAPIs.Client.Models
+@using BlazorWithDataAndAPIs.Client.Services
+@using Microsoft.AspNetCore.Components.QuickGrid
+@page "/employees"
+@rendermode InteractiveAuto
+@inject IEmployeeService EmployeeService
+@inject PersistentComponentState ComponentState; // ASP.NET Core 9
+@implements IDisposable
+<h3>ShowPeople</h3>
+
+<div>Interactive: @RendererInfo.IsInteractive</div>
+<div>Renderer Mode: @RendererInfo.Name</div>
+<div>Retrieved people via @retrieveDataMessage</div>
+
+@if (People is null)
+{
+    <div>loading</div>
+}
+else
+{
+    <div class="people-grid">
+        <QuickGrid Items="People.AsQueryable()" RowClass="GetRowClass">
+            <PropertyColumn Property="@(p => p.FirstName)" Title="First Name" />
+            <PropertyColumn Property="@(p => p.LastName)" Title="Last Name" />
+            <PropertyColumn Property="@(p => p.Email)" Title="Email" />
+        </QuickGrid>
+    </div>
+}
+
+@code {
+    // [PersistentState] // ASP.NET Core 10
+    public IEnumerable<Person>? People { get; set; }
+
+    private PersistingComponentStateSubscription? persistingSubscription;
+
+    private string retrieveDataMessage = "unknown";
+
+    // DC characters from the seed data
+    private static readonly HashSet<string> _dcLastNames =
+    [
+        "Kent", "Wayne", "Prince", "Allen", "Jordan", "Curry", "Stone", "Queen", "Kyle"
+    ];
+
+    private string? GetRowClass(Person person) =>
+        _dcLastNames.Contains(person.LastName) ? "row-dc" : "row-marvel";
+
+    protected async override Task OnInitializedAsync()
+    {
+        persistingSubscription = ComponentState.RegisterOnPersisting(OnPersistingAsync);
+
+        if (ComponentState.TryTakeFromJson<IEnumerable<Person>>("employees", out var persistedPeople))
+        {
+            // If we have persisted data, use it.
+            People = persistedPeople;
+            retrieveDataMessage = "persisted state";
+        }
+        else
+        {
+            // Otherwise, fetch the data from the service.
+            People = await EmployeeService.GetAllPeopleAsync();
+            retrieveDataMessage = "service";
+        }
+    }
+
+    Task OnPersistingAsync()
+    {
+        // This method is called when the component is being persisted.
+        // You can save any state you need here.
+        ComponentState.PersistAsJson("employees", People);
+        return Task.CompletedTask;
+    }
+
+    void IDisposable.Dispose() => persistingSubscription?.Dispose();
+
+    // ASP.NET Core 10 version
+    // protected override async Task OnInitializedAsync()
+    // {
+    //     if (People is null)
+    //     {
+    //         // Nothing was restored from persisted state, so fetch from the service.
+    //         People = await EmployeeService.GetAllPeopleAsync();
+    //         retrieveDataMessage = "service";
+    //     }
+    //     else
+    //     {
+    //         // The framework restored People from persisted state before initialization.
+    //         retrieveDataMessage = "persisted state";
+    //     }
+    // }
+}

@@ -1,0 +1,5 @@
+{
+  "appHost": {
+    "path": "BlazorWithDataAndAPIs.AppHost/BlazorWithDataAndAPIs.AppHost.csproj"
+  }
+}
