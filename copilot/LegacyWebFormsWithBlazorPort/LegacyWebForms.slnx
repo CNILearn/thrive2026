@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="LegacyWebForms.Blazor/LegacyWebForms.Blazor.csproj" />
+  <Project Path="LegacyWebForms/LegacyWebForms.csproj" Id="e6611f27-7593-46cf-b09f-a334f35e55b1" />
+</Solution>
