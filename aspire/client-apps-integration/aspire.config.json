@@ -1,0 +1,5 @@
+{
+  "appHost": {
+    "path": "ClientAppsIntegration.AppHost/ClientAppsIntegration.AppHost.csproj"
+  }
+}

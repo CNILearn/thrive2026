@@ -1,0 +1,36 @@
+﻿namespace Codebreaker.GameAPIs;
+
+public static class ApplicationServices
+{
+    public static void AddApplicationServices(this IHostApplicationBuilder builder)
+    {
+        static void ConfigureSqlServer(IHostApplicationBuilder builder)
+        {
+            builder.Services.AddDbContext<IGamesRepository, GamesSqlServerContext>(options =>
+            {
+                string connectionString = builder.Configuration.GetConnectionString("Games") ?? throw new InvalidOperationException("Games connection string not found");
+                options.UseSqlServer(connectionString);
+            });
+
+            builder.EnrichSqlServerDbContext<GamesSqlServerContext>();
+        }
+
+        static void ConfigureInMemory(IHostApplicationBuilder builder)
+        {
+            builder.Services.AddSingleton<IGamesRepository, GamesMemoryRepository>();
+        }
+
+        string? dataStore = builder.Configuration.GetValue<string>("DataStore");
+        switch (dataStore)
+        {
+            case "SqlServer":
+                ConfigureSqlServer(builder);
+                break;
+            default:
+                ConfigureInMemory(builder);
+                break;
+        }
+
+        builder.Services.AddScoped<IGamesService, GamesService>();
+    }
+}
