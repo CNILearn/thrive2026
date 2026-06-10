@@ -17,6 +17,8 @@ Dive into the latest innovations across the .NET platform with an accelerated to
 
 If the solution is big or small - Aspire can help. In this session you learn the advantages using Aspire by starting with a small ASP.NET Core application accessing a database. You'll learn how easy it is to convert an existing .NET application to Aspire, and see the advantages you get. After this you'll see using different Aspire integrations used, such as caching, AI, and accessing external services. You'll see the Aspire dashboard in action to monitor and resolve issues with the solution.
 
+- [Slides](slides/Aspire-2026.pdf)
+
 ## How Copilot can help development with Visual Studio 2026
 
 10.6.2026, 16:30 - 17:30, Seneka
